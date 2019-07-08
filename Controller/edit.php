@@ -1,3 +1,11 @@
 <?php
+    var_dump($_SESSION);
 
-require 'Views/edit.view.php';
+if(isset($_SESSION))
+{
+    
+    require 'Views/edit.view.php';
+}
+else{
+    require 'Views/edit.view.php';
+}

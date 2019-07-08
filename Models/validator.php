@@ -68,17 +68,14 @@ class Validator{
                 ;
             }    // Validate file input to check if is with valid extension
             else if (! in_array($file_extension, $allowed_image_extension)) {
-                $response ="Upload valiid images. Only PNG and JPEG are allowed."
-                ;
-                
+                $response ="Upload valiid images. Only PNG and JPEG are allowed.";
             }    // Validate image file size
             else if (($_FILES["file-input"]["size"] > 2000000)) {
                 $response ="Image size exceeds 2MB"
                 ;
             }   // Validate image file dimension
             else if ($width > "500" || $height > "500") {
-                $response =  "Image dimension should be within 300X200"
-                ;
+                $response =  "Image dimension should be within 500X500";
             } 
              else {
                 

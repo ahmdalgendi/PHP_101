@@ -34,13 +34,24 @@
                 <div class="card-body">
                     <h2 class="title">Edit your Info</h2>
                     <form method="POST">
+                        <div style = "color:white">
+                        Name
+                        </div> 
+                        <br>
                         <div class="input-group">
-                            <input class="input--style-3" type="text" placeholder="Name" name="name" >
+                            <input class="input--style-3" type="text" placeholder="<?=$_SESSION['user_data']['name']?>" name="name" >
                         </div>
+                        <div style = "color:white">
+                        Email
+                        </div> 
+                        <br>
                         <div class="input-group">
-                            <input class="input--style-3" type="email" placeholder="Email" name="email" >
+                            <input class="input--style-3" type="email" placeholder="<?=$_SESSION['user_data']['email']?>" name="email" >
                         </div>
-
+                        <div style = "color:white">
+                        Password
+                        </div> 
+                        <br>
                         <div class="input-group">
                             <input class="input--style-3" type="password" placeholder="password" name="password" >
                         </div>

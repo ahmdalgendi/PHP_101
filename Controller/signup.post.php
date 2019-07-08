@@ -11,15 +11,15 @@ $res = $pdo->save_user($user_data);
 
 if($res ==true)
 {
-if ( $mess == 'success' )
+if ( $err_mess == 'success' )
 {
-    $mess = "User successfully added";
+    $err_mess = "User successfully added";
 }
 }
-else $mess = "Email already used";
+else $err_mess = "Email already used";
 
 
-$signUpResponse = true;
-if($mess == "User successfully added")
+$alert_at_login = true;
+if($err_mess == "User successfully added")
     send_mail($user_data);
 require $router ->direct('', "GET");
