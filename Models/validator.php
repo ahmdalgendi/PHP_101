@@ -91,13 +91,21 @@ class Validator{
         }
         return $response;        
     }
+    public function user_login($user)
+    {
+        if (!Validator:: filterEmail($user->email) )
+        {
+            return "wrong email format" ;
+        }
+        return 'success';
+    }
     public function user_update($user)
     {
-        if(!$this->filterName($user->name) && sizeof($user->name) > 0)
+        if(!Validator:: filterName($user->name) && sizeof($user->name) > 0)
         {
             return "Name not good";
         }
-        else if (!$this->filterEmail($user->email) && sizeof($user->email) > 0)
+        else if (!Validator:: filterEmail($user->email) && sizeof($user->email) > 0)
         {
             return "wrong email format" ;
         }

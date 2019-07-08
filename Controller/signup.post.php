@@ -3,10 +3,10 @@
 
 require 'Models/User.php';
 require 'Models/validator.php';
-$user = new User;
+$user_data = new User;
 
-$mess = Validator::user_new($user);
-$res = $pdo->save_user($user);
+$mess = Validator::user_new($user_data);
+$res = $pdo->save_user($user_data);
 
 
 if($res ==true)
@@ -20,5 +20,6 @@ else $mess = "Email already used";
 
 
 $signUpResponse = true;
-
+if($mess == "User successfully added")
+    send_mail($user_data);
 require $router ->direct('', "GET");

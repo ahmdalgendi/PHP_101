@@ -4,10 +4,14 @@ class User
 {
     function __construct()
     {
-        $this->name = $_POST['name'];
-        $this->email = $_POST['email'];
-        $this->password =password_hash ($_POST['password'] , PASSWORD_DEFAULT);
-        $this->image = addslashes(file_get_contents($_FILES["file-input"]["tmp_name"])); 
+        if(isset($_POST['name']))
+            $this->name = $_POST['name'];
+        if(isset($_POST['email']))
+            $this->email = $_POST['email'];
+        if(isset($_POST['password']))
+            $this->password =$_POST['password'];
+        if(isset($_FILES["file-input"]))
+            $this->image = addslashes(file_get_contents($_FILES["file-input"]["tmp_name"])); 
     }
 }
 

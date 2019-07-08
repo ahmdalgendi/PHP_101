@@ -50,7 +50,8 @@ class Database
         }
         else{
             try {  
-                $stmt = "insert into users (name , email , password , image) values ('{$user->name}' , '{$user->email }' , '{$user->password}' , '{$user->image}')";
+                $hased_pass = password_hash($user->password, PASSWORD_DEFAULT);
+                $stmt = "insert into users (name , email , password , image) values ('{$user->name}' , '{$user->email }' , '{$hased_pass}' , '{$user->image}')";
             
             $this->cxn->exec($stmt);
         }catch(PDOException $e) {
@@ -62,8 +63,9 @@ class Database
     }
     public function update_user($user)
     {
+        $hased_pass = password_hash($user->password, PASSWORD_DEFAULT);
         $st =
-            "update  users set name = '{$user->name}' , email = '{$user->email}' , password  ='{$user->password}', image='{$user->image}' where email = '{$user->email}'"
+            "update  users set name = '{$user->name}' , email = '{$user->email}' , password  ='{$hased_pass}', image='{$user->image}' where email = '{$user->email}'"
          ;
         $stmt= $this->cxn->prepare($st);
         $stmt ->execute();
@@ -79,6 +81,18 @@ class Database
         
         return $results;
     }
-    
+    public function is_user($user)
+    {
+        $st = "select * from users where email = '{$user->email}'";
+        
+        $stmt= $this->cxn->prepare($st);
+        $stmt ->execute();
+        $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        if(sizeof($results) > 0)
+        {
+            return password_verify($user->password , $results[0]['password']);
+        }
+        return false;
+    }
 }
 ?>
