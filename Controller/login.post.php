@@ -13,12 +13,12 @@ if($isUser)
     $user = $pdo->get_user($user->email)[0];
     $_SESSION['user_data'] = $user;
     $err_mess = 'Log in success\nYou can edit your data';
-    var_dump($_SESSION);
+    // var_dump($_SESSION);
     require $router->direct('edit', "GET");
 }
 else {
     $err_mess = "Wrong Email or password\nSign in again";
     $alert_at_login =true;
-    require $router ->direct('', "GET");
+    header("location: /");
 
 }

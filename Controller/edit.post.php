@@ -10,7 +10,8 @@ $mess = Validator::user_update($user_data);
 
 if($mess != 'success')
 {
-    echo "<script type='text/javascript'>alert('$mess');</script>";
+    $alert_at_edit = true;
+    $err_mess = $mess;
     header("location:/edit");
 }
 
@@ -23,12 +24,14 @@ if( strlen($user_data->name) > 0 && $user_data-> name != $current_user_data['nam
 else {
     $new_user_data-> name =  $current_user_data['name'];
 }
-if(strlen($user_data->email) > 0 && $user_data-> name != $current_user_data['email'])
+if(strlen($user_data->email) > 0 && $user_data-> email != $current_user_data['email'])
 {
     $other_user = $pdo->get_user($user_data->email);
     if(sizeof ($other_user) > 0 )
     {
-        
+        $alert_at_edit = true;
+        $err_mess= "Email already used";
+        header("location: /edit");
     }
     $new_user_data-> email =  $user_data ->email;
 }
@@ -38,15 +41,14 @@ else {
 
 if(strlen($user_data->password) >0)
 {
-    $new_user_data-> password =  $user_data ->password;
+    $hased_pass = password_hash($user_data ->password ,PASSWORD_DEFAULT);
+    $new_user_data-> password = $hased_pass; 
 }
 else  $new_user_data-> password = $current_user_data['password'];
-if(strlen($user_data->image)>0)
-{
-    $new_user_data-> image =  $user_data ->image;
-}
-else {
-    $new_user_data-> image = $current_user_data ['image'];
-}
 
-var_dump($new_user_data);
+$ret =$pdo -> update_user($new_user_data , $current_user_data['email']);
+$new_user_data = $pdo->get_user($new_user_data->email);
+$_SESSION['user_data'] =(array) $new_user_data;
+
+header("location:/edit");
+

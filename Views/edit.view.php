@@ -27,7 +27,18 @@
 </head>
 
 <body>
+<?php
+        if(isset($alert_at_edit) ){
+            if($alert_at_edit)
+            {
+                $alert_at_edit = false;
+                echo "<script type='text/javascript'>alert('$err_mess');</script>";
+            }
+    
+        }
+        
 
+    ?>
     <div class="page-wrapper bg-gra-01 p-t-180 p-b-100 font-poppins">
 
         <div class="wrapper wrapper--w780">

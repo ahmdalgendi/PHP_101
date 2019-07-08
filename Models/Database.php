@@ -52,8 +52,8 @@ class Database
             try {  
                 $hased_pass = password_hash($user->password, PASSWORD_DEFAULT);
                 $stmt = "insert into users (name , email , password , image) values ('{$user->name}' , '{$user->email }' , '{$hased_pass}' , '{$user->image}')";
-            
-            $this->cxn->exec($stmt);
+                
+                $this->cxn->exec($stmt);
         }catch(PDOException $e) {
             echo "The user could not be added.<br>".$e->getMessage();
           }
@@ -61,11 +61,11 @@ class Database
             return true;
     }
     }
-    public function update_user($user)
+    public function update_user($user , $old_email)
     {
-        $hased_pass = password_hash($user->password, PASSWORD_DEFAULT);
+        
         $st =
-            "update  users set name = '{$user->name}' , email = '{$user->email}' , password  ='{$hased_pass}', image='{$user->image}' where email = '{$user->email}'"
+            "update  users set name = '{$user->name}' , email = '{$user->email}' , password  ='{$user->password}' where email = '{$old_email}'"
          ;
         $stmt= $this->cxn->prepare($st);
         $stmt ->execute();
@@ -93,6 +93,12 @@ class Database
             return password_verify($user->password , $results[0]['password']);
         }
         return false;
+    }
+    public function delete_user($email)
+    {
+        $stmt = "DELETE FROM users where email = '{$email}'";
+        var_dump($stmt);
+        $this->cxn->exec($stmt);
     }
 }
 ?>
