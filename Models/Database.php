@@ -46,24 +46,38 @@ class Database
         $dubs = $this->get_user($user->email);
         if(sizeof($dubs)  > 0)
         {    
-            return FALSE;
+            return false;
         }
-        else{       
-            $this->cxn->query(
-                'insert into users (name , email , password , image) values ({$user->name} , {$user->email } , {$user->password} , {$user->image}'
-            );
-            return TRUE;
+        else{
+            try {  
+                $stmt = "insert into users (name , email , password , image) values ('{$user->name}' , '{$user->email }' , '{$user->password}' , '{$user->image}')";
+            
+            $this->cxn->exec($stmt);
+        }catch(PDOException $e) {
+            echo "The user could not be added.<br>".$e->getMessage();
+          }
+
+            return true;
     }
     }
     public function update_user($user)
     {
-        $this->cxn->query(
-            'update  users set name = {$user->name} , email = {$user->email , password  ={$user->password}, image={$user->image} where email = {$user->email}'
-         );
+        $st =
+            "update  users set name = '{$user->name}' , email = '{$user->email}' , password  ='{$user->password}', image='{$user->image}' where email = '{$user->email}'"
+         ;
+        $stmt= $this->cxn->prepare($st);
+        $stmt ->execute();
+       
     }
     public function get_user($email)
     {
-        return $this->cxn->query('select * from users where email = ' .$email);
+        $st = "select * from users where email = '{$email}'";
+        
+        $stmt= $this->cxn->prepare($st);
+        $stmt ->execute();
+        $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        
+        return $results;
     }
     
 }

@@ -3,8 +3,6 @@ require 'Core/Router.php';
 require 'Models/Database.php';
 require 'Core/Request.php';
 $pdo = new Database('include/vars.php');
-$stmt  = $pdo-> cxn->query('SELECT * FROM users');
-
 
 $router = new Router;
 

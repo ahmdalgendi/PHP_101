@@ -47,7 +47,7 @@
 
                         <div style = "color:white">Choose Image file:</div>
                         <div class="input-group">
-                            <input class="file-input" type="file" name="image" required style = "color:white" >
+                            <input class="file-input" type="file" name="file-input" value="Upload" required style = "color:white" >
                         </div>
                         <div class="p-t-10">
                             <button class="btn btn--pill btn--green" type="submit">Submit</button>

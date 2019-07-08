@@ -29,7 +29,15 @@
 
 
 <body>
-
+    <?php
+        if(isset($signUpResponse)){
+            if($signUpResponse)
+            {
+                $signUpResponse = false;
+                echo "<script type='text/javascript'>alert('$mess');</script>";
+            }
+    }
+    ?>
     <div class="page-wrapper bg-gra-01 p-t-180 p-b-100 font-poppins">
         <div class="wrapper wrapper--w780">
             <div class="card card-3">

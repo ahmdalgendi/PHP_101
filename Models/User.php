@@ -2,12 +2,12 @@
 
 class User
 {
-    function __construct($user_data)
+    function __construct()
     {
-        $this->name = $user_data['name'];
-        $this->email = $user_data['email'];
-        $this->password =password_hash ($user_data['password']);
-        $this->image = $user_data['image'];
+        $this->name = $_POST['name'];
+        $this->email = $_POST['email'];
+        $this->password =password_hash ($_POST['password'] , PASSWORD_DEFAULT);
+        $this->image = addslashes(file_get_contents($_FILES["file-input"]["tmp_name"])); 
     }
-    
 }
+
