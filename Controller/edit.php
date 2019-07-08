@@ -1,5 +1,5 @@
 <?php
-    var_dump($_SESSION);
+  
 
 if(isset($_SESSION))
 {
@@ -7,5 +7,8 @@ if(isset($_SESSION))
     require 'Views/edit.view.php';
 }
 else{
-    require 'Views/edit.view.php';
+    $alert_at_login = true;
+    
+    $err_mess = "You have to be logged in to show this page";
+    require $router ->direct('', "GET");
 }

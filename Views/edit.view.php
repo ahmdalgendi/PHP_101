@@ -10,7 +10,7 @@
     <meta name="keywords" content="Colorlib Templates">
 
     <!-- Title Page-->
-    <title>Au Register Forms by Colorlib</title>
+    <title>Edit your Data</title>
 
     <!-- Icons font CSS-->
     <link href="Views/vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
@@ -27,8 +27,19 @@
 </head>
 
 <body>
+
     <div class="page-wrapper bg-gra-01 p-t-180 p-b-100 font-poppins">
+
         <div class="wrapper wrapper--w780">
+        <?php
+        echo '  
+                          <tr>  
+                               <td>  
+                                <img src="data:image/jpeg;base64,'.base64_encode($_SESSION['user_data']['image'] ).'" height="200" width="200" class="img-thumnail" />  
+                               </td>  
+                          </tr>  
+                     ';  
+        ?>
             <div class="card card-3">
                 <div class="card-heading"></div>
                 <div class="card-body">
@@ -63,11 +74,19 @@
                         <div class="p-t-10">
                             <button class="btn btn--pill btn--green" type="submit">Submit</button>
                         </div>
+                        
                     </form>
+                    <form action="logout">
+                        <div class="p-t-10">
+                                <button class="btn btn--pill btn--green" type="submit">Log out</button>
+                        </div>
+                    </form>
+                    
                 </div>
             </div>
         </div>
     </div>
+    
 
     <!-- Jquery JS-->
     <script src="Views/vendor/jquery/jquery.min.js"></script>
