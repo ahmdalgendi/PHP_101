@@ -3,7 +3,6 @@
 
 if(isset($_SESSION))
 {
-    
     require 'Views/edit.view.php';
 }
 else{

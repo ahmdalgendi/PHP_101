@@ -44,7 +44,7 @@
                 <div class="card-heading"></div>
                 <div class="card-body">
                     <h2 class="title">Edit your Info</h2>
-                    <form method="POST">
+                    <form method="POST" action = 'edit'>
                         <div style = "color:white">
                         Name
                         </div> 

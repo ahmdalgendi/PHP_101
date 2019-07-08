@@ -98,16 +98,16 @@ class Validator{
     }
     public function user_update($user)
     {
-        if(!Validator:: filterName($user->name) && sizeof($user->name) > 0)
+        if(!Validator:: filterName($user->name) && strlen($user->name) > 0)
         {
             return "Name not good";
         }
-        else if (!Validator:: filterEmail($user->email) && sizeof($user->email) > 0)
+        else if (!Validator:: filterEmail($user->email) && strlen($user->email) > 0)
         {
             return "wrong email format" ;
         }
         $response= "success";
-        if (isset($_POST["upload"])) {
+        if (isset($_FILES["file-input"]["tmp_name"])) {
             // Get Image Dimension
             $fileinfo = @getimagesize($_FILES["file-input"]["tmp_name"]);
             $width = $fileinfo[0];
@@ -136,15 +136,12 @@ class Validator{
             else if (($_FILES["file-input"]["size"] > 2000000)) {
                 $response ="Image size exceeds 2MB"
                 ;
+            } // Validate image file dimension
+            else if ($width > "500" || $height > "500") {
+                $response =  "Image dimension should be within 500X500";
             }    
              else {
-                $target = "image/" . basename($_FILES["file-input"]["name"]);
-                if (move_uploaded_file($_FILES["file-input"]["tmp_name"], $target)) {
-                    $response =  "success";
-                } else {
-                    $response =  "Problem in uploading image files."
-                    ;
-                }
+                $response =  "success";
             }
         }
         return $response;        
