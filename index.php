@@ -9,5 +9,6 @@ $pdo = new Database('include/vars.php');
 $router = new Router;
 
 require 'Core/routes.php';
-$hell = 'hello world';
+
+
 require $router-> direct(Request::uri()  , Request::method());

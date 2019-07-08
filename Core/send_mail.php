@@ -1,11 +1,11 @@
 <?php
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
-require 'C:\Users\ahmed\vendor\autoload.php';
+require 'include\autoload.php';
 require 'include\vars.php';
 function send_mail($user_data)
 {
-    require 'C:\Users\ahmed\vendor\autoload.php';
+    require 'include\autoload.php';
     require 'include\vars.php';
     $mail = new PHPMailer();
     $mail->IsSMTP();

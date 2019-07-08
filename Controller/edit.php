@@ -1,7 +1,10 @@
 <?php
-  
 
-if(isset($_SESSION))
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+
+if(isset($_SESSION) && isset($_SESSION['user_data'] ) && isset($_SESSION['user_data']['email']) &&isset($_SESSION['user_data']['email']) )
 {
     require 'Views/edit.view.php';
 }

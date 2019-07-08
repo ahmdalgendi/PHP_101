@@ -11,7 +11,8 @@ class User
         if(isset($_POST['password']))
             $this->password =$_POST['password'];
         if(isset($_FILES["file-input"]))
-            $this->image = addslashes(file_get_contents($_FILES["file-input"]["tmp_name"])); 
+            $this->image = addslashes(file_get_contents($_FILES["file-input"]["tmp_name"]));
+        else $this->image = ""; 
     }
 }
 
